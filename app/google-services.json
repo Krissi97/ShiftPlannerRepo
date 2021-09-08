@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "650114175083",
+    "project_id": "shift-planner-54b59",
+    "storage_bucket": "shift-planner-54b59.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650114175083:android:094abb752b9ef50d8fe12e",
+        "android_client_info": {
+          "package_name": "com.example.shiftplanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650114175083-okdipnnnbgogjrlvmb2uro5jg7il439b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvDI28tjYTqBILZOTlZHd1zeV4ZaJxIcI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650114175083-okdipnnnbgogjrlvmb2uro5jg7il439b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
