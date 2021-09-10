@@ -8,12 +8,12 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import static java.sql.DriverManager.println;
 
-public class LogInActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.logInActivity);
+        setContentView(R.layout.login_activity);
         println("Hello");
     }
 }

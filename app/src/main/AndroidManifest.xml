@@ -9,7 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShiftPlanner">
-        <activity android:name=".LogInActivity">
+        <activity
+            android:name=".StatisticActivity"
+            android:label="@string/title_activity_statistic"
+            android:theme="@style/Theme.ShiftPlanner.NoActionBar"></activity>
+        <activity android:name=".ShiftActivity" />
+        <activity
+            android:name=".FeedActivity"
+            android:label="@string/title_activity_feed"
+            android:theme="@style/Theme.ShiftPlanner.NoActionBar" />
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
