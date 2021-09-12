@@ -10,13 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShiftPlanner">
 
-        <activity android:name=".MainActivity">
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
-        </activity>
         <activity
             android:name=".StatisticActivity"
             android:label="@string/title_activity_statistic"
@@ -28,13 +21,15 @@
             android:theme="@style/Theme.ShiftPlanner.NoActionBar" />
         <activity
             android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:label="@string/title_activity_login"/>
+        <activity android:name=".MainActivity">
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

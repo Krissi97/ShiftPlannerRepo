@@ -12,12 +12,24 @@ public class LoginDataSource {
     public Result<LoggedInUser> login(String username, String password) {
 
         try {
-            // TODO: handle loggedInUser authentication
-            LoggedInUser fakeUser =
+            // TODO: Google Login Authentification
+
+
+
+
+
+            LoggedInUser tryingUser = new LoggedInUser(
+                    java.util.UUID.randomUUID().toString(),
+                    "Testing User");
+
+            return new Result.Success<>(tryingUser);
+
+            // TODO: Old Code from LoginActivtiy
+            /*LoggedInUser fakeUser =
                     new LoggedInUser(
                             java.util.UUID.randomUUID().toString(),
                             "Jane Doe");
-            return new Result.Success<>(fakeUser);
+            return new Result.Success<>(fakeUser); */
         } catch (Exception e) {
             return new Result.Error(new IOException("Error logging in", e));
         }
