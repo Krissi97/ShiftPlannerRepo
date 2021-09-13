@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.shiftplanner.activity_manager.ActivityManager;
 import com.example.shiftplanner.ui.login.LoginActivity;
@@ -34,81 +36,68 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth myAuth;
     private GoogleSignInClient mGoogleSignInClient;
-    private final static int RC_SIGN_IN = 1000000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // You can do the assignment inside onAttach or onCreate, i.e, before the activity is displayed
-        ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK) {
-                            // There are no request codes
-                            Intent data = result.getData();
-                            // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-                            if (result.getResultCode() == RC_SIGN_IN) {
-                                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-                                try {
-                                    // Google Sign In was successful, authenticate with Firebase
-                                    GoogleSignInAccount account = task.getResult(ApiException.class);
-                                    firebaseAuthWithGoogle(account.getIdToken());
-                                    switchActivity();
-                                } catch (ApiException e) {
-                                    // Google Sign In failed, update UI appropriately
-                                    switchActivity();
-                                }
-                            }
-                        }
-                    }
-                });
 
         setContentView(R.layout.activity_main);
 
         myAuth = FirebaseAuth.getInstance();
 
-        checkIfLoggedIn();
-        createRequest();
-
-        findViewById(R.id.button_login).setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                signIn();
-            }
-        });
-    }
-
-
-    public void checkIfLoggedIn() {
-
+        //Checking if logged in
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if (account != null) {
             startActivity(new Intent(this, FeedActivity.class));
             this.finish();
         }
-    }
 
-    public void createRequest() {
+        //creating request
         GoogleSignInOptions myGSO = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, myGSO);
+        Log.d("debug99", "got client: " + mGoogleSignInClient.toString());
+
+
+        findViewById(R.id.button_login).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                resultLauncher.launch(signInIntent);
+                //switchActivity();
+            }
+        });
     }
 
-    private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+    ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
 
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
+            if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                Intent intent = result.getData();
 
+                Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(intent);
+                try {
+                    GoogleSignInAccount account = task.getResult(ApiException.class);
 
+                    assert account != null;
+                    Log.d("debug99", "Login success -> firebase");
+                    firebaseAuthWithGoogle(account.getIdToken());
+                } catch (ApiException e) {
+                    Log.d("debug99", "Login failed" + e);
+                }
+            } else
+                Log.d("debug99", "getResultCode() is null" + result.getResultCode());
 
-    private void firebaseAuthWithGoogle(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        }
+    });
+
+    private void firebaseAuthWithGoogle(String IdToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(IdToken, null);
         myAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -116,16 +105,16 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = myAuth.getCurrentUser();
-                            switchActivity();
+
+                            Log.d("debug99", "Login success -> FeedActivity");
+                            startActivity(new Intent(MainActivity.this, FeedActivity.class));
+                            finish();
+
                         } else {
                             // If sign in fails, display a message to the user.
+                            Log.d("debug99", "Login failed");
                         }
                     }
                 });
-    }
-
-    public void switchActivity()
-    {
-        startActivity(new Intent(this, FeedActivity.class));
     }
 }
