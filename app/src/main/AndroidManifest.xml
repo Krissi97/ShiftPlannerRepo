@@ -9,14 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShiftPlanner">
-
         <activity android:name=".ShiftActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_feed"
             android:theme="@style/Theme.ShiftPlanner.NoActionBar" />
         <activity android:name=".LoginActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

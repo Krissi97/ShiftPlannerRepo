@@ -32,4 +32,8 @@
     //TODO
     <string name="helper">fab_button</string>
 
+    // String for Calendar
+    <string name="back"><![CDATA[<-]]></string>
+    <string name="forward"><![CDATA[->]]></string>
+
 </resources>
