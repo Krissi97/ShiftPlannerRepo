@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.shiftplanner.R;
-import com.example.shiftplanner.databinding.FragmentStatisticBinding;
+import com.example.shiftplanner.databinding.FragmentStatisticsBinding;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -23,7 +23,7 @@ public class PlaceholderFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     private PageViewModel pageViewModel;
-    private FragmentStatisticBinding binding;
+    private FragmentStatisticsBinding binding;
 
     public static PlaceholderFragment newInstance(int index) {
         PlaceholderFragment fragment = new PlaceholderFragment();
@@ -49,16 +49,16 @@ public class PlaceholderFragment extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
 
-        binding = FragmentStatisticBinding.inflate(inflater, container, false);
+        binding = FragmentStatisticsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.sectionLabel;
-        pageViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        //final TextView textView = binding.sectionLabel;
+        //pageViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        //    @Override
+        //    public void onChanged(@Nullable String s) {
+        //        textView.setText(s);
+        //    }
+        //});
         return root;
     }
 
