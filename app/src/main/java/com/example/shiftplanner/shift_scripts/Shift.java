@@ -1,7 +1,6 @@
 package com.example.shiftplanner.shift_scripts;
 
 import com.example.shiftplanner.account.Account;
-import com.example.shiftplanner.activity_manager.ActivityManager;
 
 import java.util.Date;
 

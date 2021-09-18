@@ -3,14 +3,15 @@
     <string name="title_activity_feed">FeedActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Test Person</string>
+    <string name="nav_header_subtitle">Test.Person@hotmail.de</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    //Strings for Burger Menu
+    <string name="menu_home">Calendar</string>
+    <string name="menu_gallery">Feed</string>
+    <string name="menu_slideshow">Statistics</string>
     <string name="title_activity_statistic">StatisticActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
@@ -23,4 +24,16 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+    // Strings for LoginActivity
+    <string name="login_title">Shift Planner</string>
+    <string name="login_button">Login</string>
+
+    //TODO
+    <string name="helper">fab_button</string>
+
+    // String for Calendar
+    <string name="back"><![CDATA[<-]]></string>
+    <string name="forward"><![CDATA[->]]></string>
+
 </resources>

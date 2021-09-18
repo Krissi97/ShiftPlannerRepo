@@ -18,4 +18,5 @@ public class ShiftActivity extends AppCompatActivity {
 
     public void nextMonthAction(View view) {
     }
+
 }

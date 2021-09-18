@@ -9,14 +9,10 @@ import java.io.IOException;
  */
 public class LoginDataSource {
 
-    public Result<LoggedInUser> login(String username, String password) {
+    public Result login(String username, String password) {
 
         try {
             // TODO: Google Login Authentification
-
-
-
-
 
             LoggedInUser tryingUser = new LoggedInUser(
                     java.util.UUID.randomUUID().toString(),
