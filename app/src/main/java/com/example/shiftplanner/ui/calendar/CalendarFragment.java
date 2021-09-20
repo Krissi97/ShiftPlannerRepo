@@ -12,23 +12,23 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.shiftplanner.databinding.FragmentHomeBinding;
+import com.example.shiftplanner.databinding.FragmentCalenderBinding;
 
 public class CalendarFragment extends Fragment {
 
     private CalendarViewModel calendarViewModel;
-    private FragmentHomeBinding binding;
+    private FragmentCalenderBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         calendarViewModel =
                 new ViewModelProvider(this).get(CalendarViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentCalenderBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        calendarViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        //final TextView textView = binding.textHome;
+        //calendarViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
