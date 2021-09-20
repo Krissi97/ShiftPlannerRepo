@@ -1,14 +1,16 @@
 package com.example.shiftplanner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shiftplanner.account.Account;
 import com.example.shiftplanner.databinding.ActivityMainBinding;
+import com.example.shiftplanner.shift_scripts.Shift;
 import com.example.shiftplanner.ui.calendar.CalendarAdapter;
-import com.example.shiftplanner.ui.calendar.CalendarUtils;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
 
     private TextView monthYearText;
     private RecyclerView calendarRecyclerView;
-
+    private LocalDate selectedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +65,11 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         NavigationUI.setupWithNavController(navigationView, navController);
 
 
-       //initWidgets();
-        CalendarUtils.selectedDate = LocalDate.now();
-        //setMonthView();
+        initWidgets();
+        selectedDate = LocalDate.now();
+        setMonthView();
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -89,8 +92,8 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
 
 
     private void setMonthView() {
-        monthYearText.setText(CalendarUtils.monthYearFromDate(CalendarUtils.selectedDate));
-        ArrayList<LocalDate> daysInMonth = CalendarUtils.daysInMonthArray(CalendarUtils.selectedDate);
+        monthYearText.setText(monthYearFromDate(selectedDate));
+        ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
 
         CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
@@ -98,27 +101,43 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         calendarRecyclerView.setAdapter(calendarAdapter);
     }
 
+    private ArrayList<String> daysInMonthArray(LocalDate date) {
+        ArrayList<String> daysInMonthArray = new ArrayList<>();
+        YearMonth yearMonth = YearMonth.from(date);
+
+        int daysInMonth = yearMonth.lengthOfMonth();
+
+        LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
+        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
+
+        for (int i = 1; i <= 42; i++) {
+            if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
+                daysInMonthArray.add("");
+            } else {
+                daysInMonthArray.add(String.valueOf(i - dayOfWeek));
+            }
+        }
+        return daysInMonthArray;
+    }
+
+    private String monthYearFromDate(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+        return date.format(formatter);
+    }
 
     public void previousMonthAction(View view) {
-        CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusMonths(1);
+        selectedDate = selectedDate.minusMonths(1);
         setMonthView();
     }
 
     public void nextMonthAction(View view) {
-        CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusMonths(1);
+        selectedDate = selectedDate.plusMonths(1);
         setMonthView();
     }
 
     @Override
-    public void onItemClick(int position, LocalDate date) {
-
-        if(date != null)
-        {
-
-            CalendarUtils.selectedDate = date;
-            String message = "Selected Date " + date + " " + CalendarUtils.monthYearFromDate(CalendarUtils.selectedDate);
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-            setMonthView();
-        }
+    public void onItemClick(int position, String dayText) {
+        if (dayText != "")
+            startActivity(new Intent(this, ShiftActivity.class));
     }
 }
