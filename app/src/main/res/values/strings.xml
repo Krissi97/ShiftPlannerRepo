@@ -38,4 +38,8 @@
     <string name="back"><![CDATA[<-]]></string>
     <string name="forward"><![CDATA[->]]></string>
 
+    // String for Shift
+    <string name="accept">Accept </string>
+    <string name="deny">Deny </string>
+
 </resources>
