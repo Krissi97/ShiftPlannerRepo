@@ -24,4 +24,7 @@ public class ShiftActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shift);
     }
+
+    public void nextDayAction(View view) {
+    }
 }
