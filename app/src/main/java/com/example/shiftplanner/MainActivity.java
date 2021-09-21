@@ -1,5 +1,6 @@
 package com.example.shiftplanner;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -70,12 +71,20 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        findViewById(R.id.action_settings).setOnClickListener(v -> {
+            logOut();
+        });
+
 
         initWidgets();
         CalendarUtils.selectedDate = LocalDate.now();
         setMonthView();
 
         privDays = daysInMonthArray(CalendarUtils.selectedDate);
+    }
+
+    private void logOut() {
+
     }
 
 

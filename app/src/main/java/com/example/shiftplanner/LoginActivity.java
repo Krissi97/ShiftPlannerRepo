@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Debug;
 import android.util.Log;
 import android.view.View;
 
@@ -48,13 +49,12 @@ public class LoginActivity extends AppCompatActivity {
 
         //creating request
         GoogleSignInOptions myGSO = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestIdToken(getString(R.string.user_web_client_id))
                 .requestEmail()
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, myGSO);
         Log.d("debug99", "got client: " + mGoogleSignInClient.toString());
-
 
         findViewById(R.id.button_login).setOnClickListener(v -> {
             Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -72,13 +72,13 @@ public class LoginActivity extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
 
                 assert account != null;
-                Log.d("debug99", "Login success -> firebase");
                 firebaseAuthWithGoogle(account.getIdToken());
+                Log.d("debug99", "Login success -> firebase");
+
             } catch (ApiException e) {
-                Log.d("debug99", "Login failed" + e);
+                Log.d("debug99", "Login failed" + e.toString());
             }
-        } else
-        {
+        } else {
             Log.d("debug99", "getResultCode() is null: " + result.getResultCode() + " | Auto Switching to Feed.");
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
@@ -95,6 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                         FirebaseUser user = myAuth.getCurrentUser();
 
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        Log.d("debug99", "Login firebase success");
                         finish();
 
                     } else {

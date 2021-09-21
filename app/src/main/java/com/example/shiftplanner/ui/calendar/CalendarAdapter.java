@@ -47,17 +47,6 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CalendarViewHolder holder, int position) {
 
-        //TODO: App stürzt ab -> Code so, dass nur Schicht Tage markiert werden
-        //Date tempDate = new Date(daysOfMonth.get(position));
-
-        // Calendar tempCalendar = Calendar.getInstance();
-        //tempCalendar.setTime(tempDate);
-
-        //if (tempCalendar.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY || tempCalendar.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY) {
-        // Shift tempShift = new Shift(tempDate, ShiftState.FREE, new Account("test", "testemail@test"), 3);
-        //   holder.parentView.setBackgroundColor(Color.LTGRAY);
-        //}
-
         final LocalDate date = days.get(position);
 
         if (date == null) {
@@ -65,17 +54,10 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         }
         else
         {
-
-            Log.d("debug99", "date not null");
-
-
             if (isBusinessDay(date))
                 holder.parentView.setBackgroundColor(Color.LTGRAY);
-            else
-                Log.d("debug99", "date is holiday/weekend");
 
             holder.dayOfMonth.setText(String.valueOf(date.getDayOfMonth()));
-            Log.d("debug99", "date text set");
         }
     }
 
