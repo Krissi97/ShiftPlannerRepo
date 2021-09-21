@@ -10,28 +10,28 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.shiftplanner.R;
-import com.example.shiftplanner.account.Account;
-import com.example.shiftplanner.shift_scripts.Shift;
-import com.example.shiftplanner.shift_scripts.ShiftState;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.example.shiftplanner.ui.calendar.CalendarUtils.isBusinessDay;
+
 
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
-    private final ArrayList<String> daysOfMonth;
-    public ArrayList<Shift> shiftListPerMonth;
+    private final ArrayList<LocalDate> days;
 
     private final OnItemListener onItemListener;
 
 
-    public CalendarAdapter(ArrayList<String> daysOfMonth, OnItemListener onItemListener) {
-        this.daysOfMonth = daysOfMonth;
+    public CalendarAdapter(ArrayList<LocalDate> days, OnItemListener onItemListener) {
+        this.days = days;
         this.onItemListener = onItemListener;
-        //shiftListPerMonth = new ArrayList<Shift>(daysOfMonth.size());
-        // createShiftList();
     }
 
     @NonNull
@@ -41,7 +41,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         View view = inflater.inflate(R.layout.calendar_cell, parent, false);
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         layoutParams.height = (int) (parent.getHeight() * 0.166666666);
-        return new CalendarViewHolder(view, onItemListener);
+        return new CalendarViewHolder(view, onItemListener, days);
     }
 
     @Override
@@ -57,14 +57,32 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarViewHolder> {
         // Shift tempShift = new Shift(tempDate, ShiftState.FREE, new Account("test", "testemail@test"), 3);
         //   holder.parentView.setBackgroundColor(Color.LTGRAY);
         //}
-        if (daysOfMonth.get(position) != "")
-            holder.parentView.setBackgroundColor(Color.LTGRAY);
-        holder.dayOfMonth.setText(daysOfMonth.get(position));
+
+        final LocalDate date = days.get(position);
+
+        if (date == null) {
+            holder.dayOfMonth.setText("");
+        }
+        else
+        {
+
+            Log.d("debug99", "date not null");
+
+
+            if (isBusinessDay(date))
+                holder.parentView.setBackgroundColor(Color.LTGRAY);
+            else
+                Log.d("debug99", "date is holiday/weekend");
+
+            holder.dayOfMonth.setText(String.valueOf(date.getDayOfMonth()));
+            Log.d("debug99", "date text set");
+        }
     }
+
 
     @Override
     public int getItemCount() {
-        return daysOfMonth.size();
+        return days.size();
     }
 
     public interface OnItemListener {
