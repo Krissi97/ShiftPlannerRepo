@@ -27,8 +27,6 @@ public class StatisticsFragment extends Fragment {
         binding = FragmentStatisticsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
-        statisticsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

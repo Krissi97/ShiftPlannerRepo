@@ -45,4 +45,11 @@
     <string name="day_date">20.09.21</string>
     <string name="day_time">10:00 - 18:00</string>
 
+    // String for Statistic
+    <string name="statistic_profile_name">Test User</string>
+    <string name="statistic_hours_worked_last_month_title">Hours worked last Month:</string>
+    <string name="statistic_hours_worked_last_month">45</string>
+    <string name="statistic_marked_red">Test User</string>
+    <string name="statistic_marked_green">Test User</string>
+
 </resources>

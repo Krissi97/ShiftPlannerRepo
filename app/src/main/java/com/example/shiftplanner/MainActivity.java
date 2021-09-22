@@ -56,8 +56,6 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarFeed.toolbar);
-        binding.appBarFeed.fab.setOnClickListener(view -> Snackbar.make(view, "Replace with ´Contact Owner´...", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show());
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
 
@@ -85,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
 
     private void logOut() {
 
+        Log.d("debug99", "logout button pressed");
     }
 
 
