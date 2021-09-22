@@ -39,7 +39,10 @@
     <string name="forward"><![CDATA[->]]></string>
 
     // String for Shift
-    <string name="accept">Accept </string>
-    <string name="deny">Deny </string>
+    <string name="accept">Accept</string>
+    <string name="deny">Deny</string>
+    <string name="day_name_text">Monday</string>
+    <string name="day_date">20.09.21</string>
+    <string name="day_time">10:00 - 18:00</string>
 
 </resources>
