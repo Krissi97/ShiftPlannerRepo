@@ -69,9 +69,9 @@ public class MainActivity extends AppCompatActivity implements CalendarAdapter.O
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        findViewById(R.id.action_settings).setOnClickListener(v -> {
-            logOut();
-        });
+        //findViewById(R.id.action_settings).setOnClickListener(v -> {
+         //   logOut();
+        //});
 
 
         initWidgets();
