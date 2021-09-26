@@ -74,7 +74,8 @@
                 android:layout_gravity="bottom"
                 android:layout_weight="1"
                 android:backgroundTint="#45FF64"
-                android:text="@string/accept" />
+                android:text="@string/accept"
+                android:textColor="@drawable/button_text_color"/>
 
             <Button
                 android:id="@+id/deny_button"
@@ -83,7 +84,8 @@
                 android:layout_gravity="bottom"
                 android:layout_weight="1"
                 android:backgroundTint="#FF4747"
-                android:text="@string/deny" />
+                android:text="@string/deny"
+                android:textColor="@drawable/button_text_color"/>
 
         </LinearLayout>
     </LinearLayout>
